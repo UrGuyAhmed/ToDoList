@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dynamic Todo List</title>
+    <style>
+        
+        body {
+            font-family: Bahnschrift;
+            background-color: rgb(163, 163, 163);
+        }
+        .task {
+            padding: 10px;
+            margin: 5px 0;
+            background-color: #f9f9f9;
+            border: 1px solid #ccc;
+            cursor: pointer;
+            border-radius: 5px;
+            background-color: black;
+            color:white
+        }
+        .highlight {
+            background-color: green;
+        }
+        .placeholder {
+            color: #ececec;
+            font-family: Bahnschrift;
+        }
+        #taskInput{
+            width: 50%;
+            padding: 10px;
+            font-size: 16px;
+            background-color: black;
+            color:white;
+            font-family: Bahnschrift;
+            border-radius: 5px;
+            margin-left: 100px;
+            box-shadow: 10px 10px 5px #888888;
+            outline-color: black
+        }
+        #addTaskBtn{
+            padding: 10px;
+            font-size: 16px;
+            background-color: black;
+            color:white;
+            font-family: Bahnschrift;
+            border-radius: 5px;
+            margin: 10px;
+            cursor: pointer;
+            outline-color: black
+        }
+        #todoList{
+            list-style-type: none;
+            padding: 0;
+            margin: 0;
+        }
+        #h{
+            color: black;
+            font-family: Bahnschrift;
+            margin-right: 10px;
+            position: relative;
+            margin-left: 50%;
+        
+        }
+    </style>
+</head>
+<body>
+    
+    <h1 id="h">To do List</h1>
+    <input type="text" id="taskInput" placeholder="Enter a new task">
+    <button id="addTaskBtn">Add Task</button>
+    <ul id="todoList"></ul>
+
+    <script>
+        const addTaskBtn = document.getElementById('addTaskBtn');
+        const taskInput = document.getElementById('taskInput');
+        const todoList = document.getElementById('todoList');
+
+        
+        addTaskBtn.addEventListener('click', () => {
+            const taskText = taskInput.value.trim();
+            if (taskText) {
+                const task = document.createElement('li');
+                task.textContent = taskText;
+                task.className = 'task';
+
+                
+                task.addEventListener('click', () => {
+                    task.classList.toggle('highlight');
+                });
+
+                
+                task.addEventListener('dblclick', () => {
+                    todoList.removeChild(task);
+                });
+
+                todoList.appendChild(task);
+                taskInput.value = ''; 
+            } else {
+                alert('Please enter a task!');
+            }
+        });
+    </script>
+</body>
+</html>
